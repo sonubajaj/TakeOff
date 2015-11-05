@@ -1,0 +1,373 @@
+@import "variables";
+@import "compass/css3/box-shadow";
+@import "compass/css3/opacity";
+@import "compass/css3/border-radius";
+@import "compass/css3/images";
+@import "compass/css3/transform";
+
+@media only screen and (min-width: 601px) {
+  a, a:focus {
+    outline: 0 !important;
+  }
+  .mobile-layout {
+    display: none;
+  }
+  .desktop-layout {
+    position:relative;width:100%;height:100%; overflow:hidden;
+    #front-logo {
+      display: none;
+    }
+    &.is-home {
+      #front-logo {
+        display: block;
+      }
+    }
+  }
+  .is-home {
+    #slides-container {
+      display: none;
+    }
+    #front-logo {
+      display: block;
+    }
+    & ~ #footer-logo {
+      display: none;
+    }
+  }
+
+  #gola-wibe, #gola {
+    position: absolute;
+    width: 30px;height:30px;
+    left:0; right:0; margin-left: auto;margin-right: auto;
+    @include border-radius(30px);bottom: 10%;z-index: 99;
+  }
+  #gola {
+    background-color: White;
+    &:hover {
+      background-color: Yellow;
+      cursor: pointer;
+    }
+  }
+  #gola-wibe {
+    border: 1px solid White;
+  }
+  #slides-container,.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;left: 0;
+  }
+  #slides-container {
+    z-index: 2;
+  }
+  .heading-container, .slide-content {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: left;
+  }
+  $colorValues: $red, $orange, $blue, $green;
+  $color: red, orange, blue, green;
+  @for $i from 1 through length($color) {
+    $cName: nth($color, $i);
+    $cVal: nth($colorValues, $i);
+    .slide.#{$cName}-style {
+      color: lighten($cVal, 45%);
+      .heading-container {
+        background-color: $cVal;
+      }
+      .slide-content {
+        background-color: darken($cVal, 4%);
+      }
+      &.active ~ #paginator li {
+        background-color: darken($cVal, 14%);
+        &.active {
+          background-color: lighten($cVal, 45%);
+        }
+      }
+    }
+  }
+  .slide {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+  .heading-container {
+    @include box-shadow(2px 0px 9px rgb(20,20,20));
+    z-index: 3;
+    h1 {
+      margin: 16px;
+      font-size: 42px;
+    }
+  }
+  .slide-content {
+    overflow-y: scroll;
+    padding-left: 30px;padding-right: 20%;
+    p {
+      margin-bottom: 42px;
+    }
+  }
+  .summary {
+    position: absolute;
+    font-family: $serif;
+    right: 20px; top: 12%;
+    width: 30%;
+    text-align: right;
+    line-height: 20px;
+    @include opacity(0.8);
+    padding: 30px 20px 30px 10px;
+    padding-top: 30px;padding-bottom: 30px;padding-right: 20px;
+    border: solid 1px;
+    @include border-radius(3px);
+    .big {
+      font-size: 42px;
+    }
+  }
+  .heading-content {
+    position: absolute;
+    margin-left: auto; margin-right: auto;left:0;right:0;
+    text-align: center;
+    margin-top: 16%;
+  }
+
+  #paginator {
+    position: absolute;
+    width: 50%;
+    left: 0; bottom: 40%;
+    z-index: 3;
+    text-align: center;
+    ul {
+      margin:0;padding:0;
+      li {
+        &:hover {
+          cursor: pointer;
+        }
+        display: inline-block;
+        a {
+          visibility: hidden;
+        }
+        margin-right: 10px;
+        height: 15px;width: 15px;@include border-radius(10px);
+        background-color: White;
+        &.active {
+          @include scale(1.2);
+        }
+      }
+      // li:nth-child(1), li:nth-last-child(1) {
+      //   display: none;
+      // }
+    }
+  }
+
+  #footer-logo {
+    //position: relative;
+    position: absolute;
+    bottom:5%;
+    width: 50%;float: left;
+    margin-top: -150px;
+    text-align: center;
+    z-index: 3;
+    color: White;
+    .logo {
+      height: 50px;
+    }
+    .links {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+    .link{
+      margin-right: 30px;
+      a {
+        text-decoration: none;
+        color: inherit;
+        &:visited {
+          text-decoration: none;
+          color: inherit;
+        }
+      }
+    }
+    .link.contact-link {
+      margin-right: 0px;
+    }
+  }
+  .contact .contact-link, .index .index-link, .portfolio .portfolio-link, .link:hover {
+    border-bottom: solid 1px;
+  }
+
+  #map, #contact-form {
+    position: relative;
+    display: inline-block;
+    margin-top: 5%;
+    margin-left: 30px;
+    float: left;
+  }
+
+  #contact-form {
+    width: 380px;
+    position: relative;
+    margin-top: 5%;
+    text-align: left;
+    margin-left: 10%;
+    color: White;
+    h1 {
+      color: White;
+      text-transform: small-caps;
+      margin: 0;
+      &.response {
+        display: none;
+      }
+    }
+    &.sent-mail{
+      .response {
+        display: block;
+      }
+      .heading, #inquiry, #action {
+        display: none;
+      }
+    }
+    div {
+      position: relative;
+      .elem {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        @include background(linear-gradient(to bottom, #E68A78 0%, #DC593F 100%));
+        top: 0px;right:20px;
+        border-color: #9c2912;border-style: solid;
+        border-width: 3px 1px 8px 1px;
+        text-align: center;
+        padding-top: 10px;
+        &.mobile{padding-top:5px;}
+      }
+    }
+    #action {
+      margin-top: 10px;
+      font-size: 32px;
+      text-align:center;
+      .f-icon {display:none;}
+      &.untouched .icon-paper-plane{
+        display:block;
+        cursor: pointer;
+      }
+      &.loading .icon-spin5{display:block;}
+      input.submit {
+        visibility: hidden;
+        position: absolute;
+        z-index: 2;
+        top: -15px;
+      }
+    }
+    .form-control {
+      position: relative;
+      .error {
+        position: absolute;
+        top:1px; left:10px;
+        color: rgba(47, 32, 146, 1);
+        font-size: 11px;
+        display: none;
+      }
+    }
+    form.dirty {
+      .show-required-error .error-required, .show-email-error .error-email, .show-mobile-error .error-mobile {
+        display: block;
+      }
+    }
+    .icon-mobile-alt {
+      font-size: 20px;
+    }
+    input {
+      height: 50px;
+    }
+    input.first{
+      margin-top: 5px;
+    }
+    input,textarea {
+      display: block;
+      margin-top: 20px;
+      width: 100%;
+      background-color: lighten($grey-color, 24%);
+      border-color: lighten($grey-color, 14%);
+      border-style: solid;
+      border-width: 3px 5px 8px 8px;
+      @include border-radius(2px);
+      color: White;
+      padding-left: 15px;
+      &:focus {
+        @include box-shadow(0px 0px 2px 4px rgb(220,220,220));
+      }
+    }
+    textarea {
+      resize: none;
+      padding-top: 10px;
+    }
+  }
+
+  .portfolio {
+    color: darken(White, 10%);
+    .section {
+      float: left;
+      padding: 50px;
+      &.left {
+        width: 40%;
+        padding-top: 97px;
+      }
+      &.right {
+        width: 60%;
+        padding-top: 30px;
+        padding-left: 10px;
+      }
+    }
+    .logo-cont {
+      width: 145px;
+      height: 60px;
+      background-color: White;
+      position: relative;
+      margin-right: 50px;
+      margin-bottom: 50px;
+      float: left;
+      @include border-radius(5px);
+      &.active {
+        @include box-shadow(0px 0px 5px 8px #C25151);
+      }
+      img {
+        position: absolute;
+        width: 90%;
+        height: auto;
+        right:0;left:0; margin: auto auto;
+        bottom: 10px;
+      }
+    }
+    .website {
+      display: none;
+      &.active {
+        display: block;
+      }
+      h1,h3,h2 {
+        margin-top: 5px;
+        text-align: center;
+      }
+      a,a:visited,a:hover {
+        color: inherit;
+      }
+    }
+    .bx-wrapper .bx-caption {
+      bottom: 26px;
+      text-align: center;
+      background: none repeat scroll 0% 0% rgba(38, 38, 38, 0.9);
+      span {
+        font-family: $sans;
+        font-size: 20px;
+        padding-top: 4px;
+        padding-bottom: 8px;
+        font-weight: bolder;
+      }
+    }
+    .bx-wrapper .bx-pager.bx-default-pager a {
+      background-color: #fff;
+      &.active {
+        background-color: $red;
+      }
+    }
+  }
+}

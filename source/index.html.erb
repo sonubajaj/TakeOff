@@ -1,0 +1,76 @@
+<span class="mobile-layout">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <!-- <div id="front-logo" class="swiper-slide slide-1">
+            <%= image_tag 'logo.png', :class => 'logo' %>
+            <div id="arrows">
+                <%= image_tag 'arrow.png'%>
+                <%= image_tag 'arrow.png'%>
+                <%= image_tag 'arrow.png'%>
+            </div>
+        </div> -->
+        <div id="front-logo" class="swiper-slide slide-1">
+            <div id="logo-content" class="abs-center">
+                <%= image_tag 'logo.png' , :class => 'logo' %><br/>
+                <span class="heading tagline">Aim your venture to success <div id="hider"></div></span>
+            </div>
+            <div id="arrows">
+                <%= image_tag 'arrow.png'%>
+                <%= image_tag 'arrow.png'%>
+                <%= image_tag 'arrow.png'%>
+            </div>
+        </div>
+        <% counter = 2 %>
+        <% data.slides.each do |slide| %>
+            <div class="swiper-slide <%= slide.css_class %> slide-<%= counter %>">
+                <% counter = counter + 1 %>
+                <div class="inline-heading">
+                    <h1 class="heading"><%= slide.heading %></h1>
+                    <%= image_tag slide.image, :class => 'heading-logo' %>
+                </div>
+                <% slide.content.each do |content| %>
+                    <h2><%= content.title %></h2>
+                    <p><%= content.body %></p>
+                <% end %>
+                <div class="summary">
+                  <span class="big">“</span><span><%= slide.tagline %></span><span class="big" style="position:absolute; margin-top: 26px;">”</span>
+                </div>
+            </div>
+        <% end %>
+        </div>
+    </div>
+</span>
+<div class="desktop-layout is-home">
+    <div id="front-logo">
+        <div id="logo-content" class="abs-center">
+            <%= image_tag 'logo.png' %><br/>
+            <span class="heading tagline">Aim your venture to success <div id="hider"></div></span>
+        </div>
+    </div>
+    <div id="gola-wibe">
+    </div> <div id="gola"></div>
+    <div id="slides-container">
+        <% data.slides.each do |slide| %>
+            <div class="slide <%= slide.css_class %>">
+                <div class="heading-container">
+                    <div class="heading-content">
+                        <h1 class="heading"><%= slide.heading %></h1>
+                        <%= image_tag slide.image, :class => 'heading-logo' %>
+                    </div>
+                </div>
+                <div class="slide-content">
+                    <% slide.content.each do |content| %>
+                        <h2><%= content.title %></h2>
+                        <p><%= content.body %></p>
+                    <% end %>
+                    <div class="summary">
+                      <span class="big">“</span><span><%= slide.tagline %></span><span class="big" style="position:absolute; margin-top: 26px;">”</span>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+        <div id="paginator"></div>
+    </div>
+</div>
+
+<%= partial "footer-logo" %>

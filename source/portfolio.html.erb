@@ -1,0 +1,54 @@
+<div class="section left">
+  <% data.websites.each do |website| %>
+    <a class="logo-cont" href="#<%= website.id %>">
+      <%= image_tag website.logo %>
+    </a>
+  <% end %>
+
+</div>
+<div class="section right">
+  <% data.websites.each do |website| %>
+    <div class="website" id="<%= website.id %>">
+      <h1><%= website.name %></h1>
+      <ul class="bxslider">
+        <% website.snaps.each do |snap| %>
+        <li>
+          <img data-src="<%= asset_path :images, snap.image %>" class="lazy" title="<% if snap.title %><%= snap.title %><% end %>"/>
+        </li>
+        <% end %>
+      </ul>
+      <h2><a target="_blank" href="<%= website.url %>">Go to website &#35;</a></h2>
+      <p><%= website.description %></p>
+    </div>
+  <% end %>
+</div>
+<%= partial "footer-logo" %>
+
+<script>
+var sliders = [];
+$('.logo-cont').click(function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  if($(this).hasClass('active')) return;
+
+  $('.logo-cont').removeClass('active');
+  $('.website').attr("class", "website");
+  $(this).addClass('active');
+  var id = $(this).attr('href');
+  $(id).addClass('active');
+  sliders[id].reloadSlider();
+  $(id).addClass('animated fadeInRight');
+})
+$(window).load(function(){
+  $('img.lazy').each(function(){
+    $(this).attr('src', $(this).data('src'));
+  })
+  $('.website').each(function(){
+    var id = $(this).attr('id');
+    sliders['#'+id] = $(this).find('.bxslider').bxSlider({captions: true});
+  })
+
+  setTimeout(function(){ $('.logo-cont:nth(0)').trigger('click'); }, 800);
+  
+})
+</script>
